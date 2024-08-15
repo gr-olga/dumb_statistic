@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import {WeeksCount} from './components/WeeksCount/WeeksCount';
+import {UserForm} from './components/UserForm/UserForm';
 
 
 function App() {
@@ -8,7 +9,7 @@ function App() {
   const currentDate = new Date();
   return (
       <div className="App">
-        <h1>WeeksCount</h1>
+        <UserForm/>
         <WeeksCount birthData={birthDate} currentDate={currentDate}/>
       </div>
   );
