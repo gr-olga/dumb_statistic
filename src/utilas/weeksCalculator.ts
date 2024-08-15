@@ -1,5 +1,15 @@
-export function weeksCalculator(userAge: number): number {
-  return userAge * 52;
+
+export function getCurrentWeek(): number {
+  const today = new Date();
+  const startOfYear = new Date(today.getFullYear(), 0, 1); // January 1st of the current year
+  const dayOfYear = Math.floor((today.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+  return Math.ceil(dayOfYear / 7);
+}
+
+
+export function weeksCalculator(birthDate: Date, currentDate: Date): number {
+  const oneWeek = 1000 * 60 * 60 * 24 * 7; // Milliseconds in a week
+  return Math.floor((currentDate.getTime() - birthDate.getTime()) / oneWeek);
 }
 
 export function monthsCalculator(userAge: number): number {
@@ -18,5 +28,6 @@ export function daysCalculator(userAge: number): number {
   const currentYear = new Date().getFullYear();
   const birthYear = currentYear - userAge;
   const leapYears = countLeapYears(birthYear);
-return  userAge * 365 + leapYears;
+  return userAge * 365 + leapYears;
 }
+
