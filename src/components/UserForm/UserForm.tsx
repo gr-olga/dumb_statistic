@@ -1,17 +1,36 @@
+import React, {useState} from 'react';
+import {TEyesColor, THairColor, TUserSex} from '../../store/userState';
+
+
 export const UserForm = () => {
+  const [name, setName] = useState<string>('');
+  const [birthDate, setBirthDate] = useState<Date>();
+  const [sex, setSex] = useState<TUserSex>('neutral');
+  const [weight, setWeight] = useState<number>();
+  const [height, setHeight] = useState<number>();
+  const [eyesColor, setEyesColor] = useState<TEyesColor>();
+  const [hairColor, setHairColor] = useState<THairColor>();
+  const [hobby, setHobby] = useState<string>();
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log('name', name);
+    console.log('birthDate', birthDate);
+  }
+
   return (
       <div>
         <h1>UserForm</h1>
-        <form>
+        <form  onSubmit={handleSubmit}>
           <label htmlFor="username">Name</label>
           <input id="name" type="text"/>
           <label htmlFor="birthDate">Birth Date</label>
           <input id="birthDate" type="date"/>
           <label htmlFor="sex">Sex</label>
           <select id="sex">
-            <option>&#x2640;</option>
-            <option>&#x2642;</option>
-            <option>&#x26A5;  &#x25B3;</option>
+            <option value="female">&#x2640;</option>
+            <option value="male">&#x2642;</option>
+            <option value="neutral">&#x26A5;  &#x25B3;</option>
           </select>
           <label htmlFor="weight">Weight</label>
           <input id="weight" type="number"/>
