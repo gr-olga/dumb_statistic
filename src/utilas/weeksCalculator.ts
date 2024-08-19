@@ -6,10 +6,9 @@ export function getCurrentWeek(): number {
   return Math.ceil(dayOfYear / 7);
 }
 
-
-export function weeksCalculator(birthDate: Date, currentDate: Date): number {
+export function weeksCalculator(birthDate: number, currentDate: Date): number {
   const oneWeek = 1000 * 60 * 60 * 24 * 7; // Milliseconds in a week
-  return Math.floor((currentDate.getTime() - birthDate.getTime()) / oneWeek);
+  return Math.floor((currentDate.getTime() - birthDate) / oneWeek);
 }
 
 export function monthsCalculator(userAge: number): number {

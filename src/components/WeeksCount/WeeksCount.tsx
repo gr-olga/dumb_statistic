@@ -3,18 +3,17 @@ import {ReactP5Wrapper} from 'react-p5-wrapper';
 import p5 from 'p5';
 
 interface WeeksCountProps {
-  birthData: Date;
+  birthData: number;
   currentDate: Date;
+  lifeExpectancy: number;
 }
 
-export const WeeksCount = ({birthData, currentDate}: WeeksCountProps) => {
-  const currentAge = Math.floor((currentDate.getTime() - birthData.getTime()) / 1000 / 60 / 60 / 24 / 365);
-  console.log('currentAge', currentAge);
+export const WeeksCount = ({birthData, currentDate, lifeExpectancy}: WeeksCountProps) => {
+  const currentAge = Math.floor((currentDate.getTime() - birthData) / 1000 / 60 / 60 / 24 / 365);
   const amountUserWeeks = weeksCalculator(birthData, currentDate);
-  console.log('amountUserWeeks', amountUserWeeks);
   const currentWeek = getCurrentWeek();
 
-  const years = 80;
+  const years = lifeExpectancy;
   const weeksPerYear = 52;
 
   const sketch = (p: p5) => {
@@ -41,8 +40,6 @@ export const WeeksCount = ({birthData, currentDate}: WeeksCountProps) => {
         for (let w = 1; w <= weeksPerYear; w++) {
           const x = xOffset + w * squareSize;
           const yPos = yOffset + y * squareSize;
-
-          console.log('w', w);
 
           if (y < currentAge) {
             p.fill(173, 216, 230); // Color for past weeks in previous years

@@ -26,7 +26,7 @@ export type THairColor =
 export interface UserState {
   user: {
     name: string;
-    birthDate: Date;
+    birthDate: number;
     sex: TUserSex;
     weight: number;
     height: number;
@@ -39,7 +39,7 @@ export interface UserState {
 const initialState: UserState = {
   user: {
     name: 'Mohammed',
-    birthDate: new Date(1994, 5, 14),
+    birthDate: new Date(1994, 5, 14).getTime(),
     sex: 'neutral',
     weight: 64,
     height: 165,
@@ -53,14 +53,36 @@ const userSlice: Slice<UserState> = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    changeUser(state: UserState, action: PayloadAction<UserState>) {
-      state.user = {
-        ...state.user,
-        ...action.payload.user
-      };
+    updateUserData(state, action: PayloadAction<UserState['user']>) {
+      state.user = action.payload;
     }
+    // changeName(state, action: PayloadAction<string>) {
+    //   state.user.name = action.payload;
+    // },
+    // changeBirthDate(state, action: PayloadAction<Date>) {
+    //   state.user.birthDate = action.payload;
+    // },
+    // changeSex(state, action: PayloadAction<TUserSex>) {
+    //   state.user.sex = action.payload;
+    // },
+    // changeWeight(state, action: PayloadAction<number>) {
+    //   state.user.weight = action.payload;
+    // },
+    // changeHeight(state, action: PayloadAction<number>) {
+    //   state.user.height = action.payload;
+    // },
+    // changeEyesColor(state, action: PayloadAction<TEyesColor>) {
+    //   state.user.eyesColor = action.payload;
+    // },
+    // changeHairColor(state, action: PayloadAction<THairColor>) {
+    //   state.user.hairColor = action.payload;
+    // },
+    // changeHobby(state, action: PayloadAction<string>) {
+    //   state.user.hobby = action.payload;
+    // }
   }
 });
 
-export const {changeUser} = userSlice.actions;
+
+export const {updateUserData,changeName, changeBirthDate, changeSex, changeWeight, changeHeight, changeEyesColor,changeHairColor,  changeHobby} = userSlice.actions;
 export default userSlice.reducer;
