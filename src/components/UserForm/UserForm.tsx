@@ -9,30 +9,32 @@ export const UserForm = () => {
   const currentUser = useSelector((state: RootState) => state.user);
   const [name, setName] = useState<string>(currentUser.name);
   const [birthDate, setBirthDate] = useState<number>(currentUser.birthDate);
-  const [sex, setSex] = useState<TUserSex>(currentUser.sex);
+  const [sex, setSex] = useState<TUserSex>('female');
   const [weight, setWeight] = useState<number>(currentUser.weight);
   const [height, setHeight] = useState<number>(currentUser.height);
   const [eyesColor, setEyesColor] = useState<TEyesColor>(currentUser.eyesColor);
   const [hairColor, setHairColor] = useState<THairColor>(currentUser.hairColor);
   const [hobby, setHobby] = useState<string>(currentUser.hobby);
-  const [user, setUser] = useState<UserState>(currentUser);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setUser({user: {name, birthDate, sex, weight, height, eyesColor, hairColor, hobby}});
-    dispatch(updateUserData(user.user));
-    // dispatch(changeBirthDate(birthDate)),
-    // dispatch(changeSex(sex)),
-    // dispatch(changeWeight(weight)),
-    // dispatch(changeHeight(height)),
-    // dispatch(changeEyesColor(eyesColor)),
-    // dispatch(changeHairColor(hairColor)),
-    // dispatch(changeHobby(hobby));
 
-    console.log('user', user);
+    const updatedUser = {
+      name,
+      birthDate,
+      sex,
+      weight,
+      height,
+      eyesColor,
+      hairColor,
+      hobby
+    };
+
+    dispatch(updateUserData(updatedUser));
+
+    console.log('user', updatedUser);
   };
 
-  // @ts-ignore
   return (
       <div>
         <h1>UserForm</h1>
@@ -50,7 +52,9 @@ export const UserForm = () => {
           <label htmlFor="sex">Sex</label>
           <select id="sex"
                   value={sex}
-                  onChange={(e) => setSex(e.target.value as TUserSex)}>
+                  onChange={(e) => {
+                    setSex(e.target.value as TUserSex);
+                  }}>
             <option value="female">&#x2640;</option>
             <option value="male">&#x2642;</option>
             <option value="neutral">&#x26A5;  &#x25B3;</option>

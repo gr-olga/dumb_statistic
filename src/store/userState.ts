@@ -56,33 +56,9 @@ const userSlice: Slice<UserState> = createSlice({
     updateUserData(state, action: PayloadAction<UserState['user']>) {
       state.user = action.payload;
     }
-    // changeName(state, action: PayloadAction<string>) {
-    //   state.user.name = action.payload;
-    // },
-    // changeBirthDate(state, action: PayloadAction<Date>) {
-    //   state.user.birthDate = action.payload;
-    // },
-    // changeSex(state, action: PayloadAction<TUserSex>) {
-    //   state.user.sex = action.payload;
-    // },
-    // changeWeight(state, action: PayloadAction<number>) {
-    //   state.user.weight = action.payload;
-    // },
-    // changeHeight(state, action: PayloadAction<number>) {
-    //   state.user.height = action.payload;
-    // },
-    // changeEyesColor(state, action: PayloadAction<TEyesColor>) {
-    //   state.user.eyesColor = action.payload;
-    // },
-    // changeHairColor(state, action: PayloadAction<THairColor>) {
-    //   state.user.hairColor = action.payload;
-    // },
-    // changeHobby(state, action: PayloadAction<string>) {
-    //   state.user.hobby = action.payload;
-    // }
   }
 });
 
 
-export const {updateUserData,changeName, changeBirthDate, changeSex, changeWeight, changeHeight, changeEyesColor,changeHairColor,  changeHobby} = userSlice.actions;
+export const {updateUserData} = userSlice.actions;
 export default userSlice.reducer;
