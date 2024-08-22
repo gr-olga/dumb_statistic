@@ -20,18 +20,19 @@ function App() {
   useEffect(() => {
     setLifeExpectancy(userData.user.sex === 'male' ? lifeExpectancyForMen :
         userData.user.sex === 'female' ? lifeExpectancyForWomen : lifeExpectancyIntersex);
-        console.log('222', userData.user.sex);
+    console.log('222', userData.user.sex);
   }, [userData.user.sex, userData.user.name]);
   return (
       <div className="App">
         <UserForm/>
-        <p> Life expectancy for {userData.user.sex} = {lifeExpectancy}</p>
-        <WeeksCount
-            birthData={userData.user.birthDate}
-            currentDate={currentDate}
-            lifeExpectancy={lifeExpectancy}
-        />
-
+        <div>
+          <p> Life expectancy for {userData.user.sex} = {lifeExpectancy}</p>
+          <WeeksCount
+              birthData={userData.user.birthDate}
+              currentDate={currentDate}
+              lifeExpectancy={lifeExpectancy}
+          />
+        </div>
       </div>
   );
 }

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {TEyesColor, THairColor, TUserSex, updateUserData, UserState} from '../../store/userState';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../store';
+import styles from './userForm.module.scss';
 
 
 export const UserForm = () => {
@@ -36,7 +37,7 @@ export const UserForm = () => {
   };
 
   return (
-      <div>
+      <div className={styles.user_form}>
         <h1>UserForm</h1>
         <form onSubmit={handleSubmit}>
           <label htmlFor="username">Name</label>
