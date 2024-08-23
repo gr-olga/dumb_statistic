@@ -4,6 +4,7 @@ import {WeeksCount} from './components/WeeksCount/WeeksCount';
 import {UserForm} from './components/UserForm/UserForm';
 import {useSelector} from 'react-redux';
 import {RootState} from './store';
+import {getCountryData} from './api';
 
 
 function App() {
@@ -22,6 +23,11 @@ function App() {
         userData.user.sex === 'female' ? lifeExpectancyForWomen : lifeExpectancyIntersex);
     console.log('222', userData.user.sex);
   }, [userData.user.sex, userData.user.name]);
+
+  getCountryData(528).then((res) => {
+    console.log('Country data:', res);
+  });
+
   return (
       <div className="App">
         <UserForm/>
