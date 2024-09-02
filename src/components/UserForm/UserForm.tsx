@@ -16,6 +16,7 @@ export const UserForm = () => {
   const [eyesColor, setEyesColor] = useState<TEyesColor>(currentUser.eyesColor);
   const [hairColor, setHairColor] = useState<THairColor>(currentUser.hairColor);
   const [hobby, setHobby] = useState<string>(currentUser.hobby);
+  const [country, setCountry] = useState<string>('Netherlands');
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -40,6 +41,12 @@ export const UserForm = () => {
       <div className={styles.user_form}>
         <h1>UserForm</h1>
         <form onSubmit={handleSubmit}>
+          <label htmlFor="country">Country</label>
+          <input id="country"
+          type="text"
+                 value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+          ></input>
           <label htmlFor="username">Name</label>
           <input id="name"
                  type="text"
