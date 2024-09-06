@@ -1,4 +1,5 @@
 import {createSlice, PayloadAction, Slice} from '@reduxjs/toolkit';
+import {TCountry} from '../api';
 
 export type TUserSex = 'female' | 'male' | 'neutral';
 export type TEyesColor =
@@ -32,7 +33,8 @@ export interface UserState {
     height: number;
     eyesColor: TEyesColor;
     hairColor: THairColor;
-    hobby: string
+    hobby: string,
+    country: TCountry
   };
 }
 
@@ -45,7 +47,13 @@ const initialState: UserState = {
     height: 165,
     eyesColor: 'Brown',
     hairColor: 'Black',
-    hobby: 'reading'
+    hobby: 'reading',
+    country: {
+      'locID': 8,
+      'location': 'Albania',
+      'iso2Code': 'AL',
+      'iso3Code': 'ALB'
+    }
   }
 };
 

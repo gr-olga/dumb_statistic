@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
-import {TEyesColor, THairColor, TUserSex, updateUserData, UserState} from '../../store/userState';
+import React, {useEffect, useState} from 'react';
+import {TEyesColor, THairColor, TUserSex, updateUserData} from '../../store/userState';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../store';
 import styles from './userForm.module.scss';
+import {getCountryList, TCountry} from '../../api';
 
 
 export const UserForm = () => {
@@ -16,7 +17,9 @@ export const UserForm = () => {
   const [eyesColor, setEyesColor] = useState<TEyesColor>(currentUser.eyesColor);
   const [hairColor, setHairColor] = useState<THairColor>(currentUser.hairColor);
   const [hobby, setHobby] = useState<string>(currentUser.hobby);
-  const [country, setCountry] = useState<string>('Netherlands');
+  const [country, setCountry] = useState<TCountry>(currentUser.country);
+  const [countriesList, setCountriesList] = useState<Array<TCountry> | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -29,7 +32,8 @@ export const UserForm = () => {
       height,
       eyesColor,
       hairColor,
-      hobby
+      hobby,
+      country
     };
 
     dispatch(updateUserData(updatedUser));
@@ -37,16 +41,46 @@ export const UserForm = () => {
     console.log('user', updatedUser);
   };
 
+
+  useEffect(() => {
+    async function fetchCountries() {
+      try {
+        const data = await getCountryList();
+        setCountriesList(data);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);  // Access message safely
+        } else {
+          setError('An unknown error occurred');  // Handle non-Error types
+        }
+      }
+    }
+
+    fetchCountries();
+  }, []);
+
+
+  const handleCountryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const locID = Number(event.target.value);
+    const chosenCountry = countriesList?.find(country => country.locID === locID);
+    if (chosenCountry) {
+      setCountry(chosenCountry);
+    }
+  };
+
   return (
       <div className={styles.user_form}>
         <h1>UserForm</h1>
         <form onSubmit={handleSubmit}>
           <label htmlFor="country">Country</label>
-          <input id="country"
-          type="text"
-                 value={country}
-                  onChange={(e) => setCountry(e.target.value)}
-          ></input>
+          <select id="country"
+                  onChange={handleCountryChange}
+          >
+            <option value="">Select a country</option>
+            {countriesList && countriesList.map((item, index) => {
+              return <option key={item.locID} value={item.locID}>{item.location} </option>;
+            })}
+          </select>
           <label htmlFor="username">Name</label>
           <input id="name"
                  type="text"

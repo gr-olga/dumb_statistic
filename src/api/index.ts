@@ -3,7 +3,7 @@ import axios, {AxiosResponse} from 'axios';
 const BASE_URL: string = 'https://world-demographics.p.rapidapi.com';
 const apiKey: string | undefined = process.env.REACT_APP_API_KEY;
 
-interface TCountry {
+export interface TCountry {
   'locID': number,
   'location': string,
   'iso2Code': string,
@@ -84,17 +84,12 @@ interface TCountryData {
 export async function getCountryList() {
 
   const url: string = `${BASE_URL}/countries`;
-  const res: AxiosResponse<TCountry> = await axios.get(url,
-      {
-        headers: {
-          'x-rapidapi-key': apiKey,
-          'x-rapidapi-host': 'world-demographics.p.rapidapi.com'
-        }
-        //TODO: fix any
-      }).catch((error: any) => {
-    console.error('Error:', error.message);
-    return error;
-  });
+  const res: AxiosResponse<Array<TCountry>> = await axios.get(url, {
+    headers: {
+      'x-rapidapi-key': apiKey,
+      'x-rapidapi-host': 'world-demographics.p.rapidapi.com'
+    }
+  })
   return res.data;
 }
 
@@ -106,12 +101,13 @@ export async function getCountryData(countryId: number) {
           'x-rapidapi-key': apiKey,
           'x-rapidapi-host': 'world-demographics.p.rapidapi.com'
         }
+        //TODO: fix any
       }).catch((error: any) => {
     console.error('Error:', error.message);
-    return { data: {} as TCountryData } as AxiosResponse<TCountryData>;
+    return {data: {} as TCountryData} as AxiosResponse<TCountryData>;
   });
- const  currentYear = new Date().getFullYear()
-  const targetYear = currentYear - 2
+  const currentYear = new Date().getFullYear();
+  const targetYear = currentYear - 2;
   //TODO: find better solution
   // const actualData = res.data.find((item: TCountryData) => item.time === targetYear)
   const actualData = Array.isArray(res.data) ? res.data.find((item: TCountryData) => item.time === targetYear) : null;
