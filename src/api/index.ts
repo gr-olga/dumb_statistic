@@ -1,6 +1,8 @@
 import axios, {AxiosResponse} from 'axios';
 
-const BASE_URL: string = 'https://world-demographics.p.rapidapi.com';
+// const BASE_URL: string = 'https://world-demographics.p.rapidapi.com';
+
+const BASE_URL: string = 'http://localhost:3001/api';
 const apiKey: string | undefined = process.env.REACT_APP_API_KEY;
 
 export interface TCountry {
@@ -93,13 +95,17 @@ export async function getCountryList() {
   return res.data;
 }
 
-export async function getCountryData(countryId: number) {
+// export async function getCountryData(countryId: number) {
+export async function getCountryData() {
+  const countryId = 8;
   const url: string = `${BASE_URL}/countries/${countryId}`;
   const res: AxiosResponse<TCountryData> = await axios.get(url,
       {
         headers: {
           'x-rapidapi-key': apiKey,
           'x-rapidapi-host': 'world-demographics.p.rapidapi.com'
+          // 'Access-Control-Allow-Origin': '*',
+          // 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
         }
         //TODO: fix any
       }).catch((error: any) => {

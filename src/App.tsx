@@ -18,13 +18,14 @@ function App() {
   console.log('111', userCountryId);
 
   useEffect(() => {
-    getCountryData(userCountryId).then((data) => {
+    // getCountryData(userCountryId).then((data) => {
+    getCountryData().then((data) => {
           console.log('res', data);
           if (userData.sex === 'female') {
             setLifeExpectancy(Math.round(data.lExFemale));
           } else if (userData.sex === 'male') {
             setLifeExpectancy(Math.round(data.lExMale));
-          } else {
+          } else if (userData.sex === 'neutral') {
             setLifeExpectancy(Math.round(data.lEx));
           }
         }

@@ -42,7 +42,7 @@ const initialState: UserState = {
   user: {
     name: 'Mohammed',
     birthDate: new Date(1994, 5, 14).getTime(),
-    sex: 'neutral',
+    sex: 'female',
     weight: 64,
     height: 165,
     eyesColor: 'Brown',
