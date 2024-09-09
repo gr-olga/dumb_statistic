@@ -11,7 +11,7 @@ export const UserForm = () => {
   const currentUser = useSelector((state: RootState) => state.user);
   const [name, setName] = useState<string>(currentUser.name);
   const [birthDate, setBirthDate] = useState<number>(currentUser.birthDate);
-  const [sex, setSex] = useState<TUserSex>('female');
+  const [sex, setSex] = useState<TUserSex>(currentUser.sex);
   const [weight, setWeight] = useState<number>(currentUser.weight);
   const [height, setHeight] = useState<number>(currentUser.height);
   const [eyesColor, setEyesColor] = useState<TEyesColor>(currentUser.eyesColor);
@@ -97,6 +97,7 @@ export const UserForm = () => {
                   onChange={(e) => {
                     setSex(e.target.value as TUserSex);
                   }}>
+            <option value="">Select a sex</option>
             <option value="female">&#x2640;</option>
             <option value="male">&#x2642;</option>
             <option value="neutral">&#x26A5;  &#x25B3;</option>
@@ -115,6 +116,7 @@ export const UserForm = () => {
           <select id="eyesColor"
                   value={eyesColor}
                   onChange={(e) => setEyesColor(e.target.value as TEyesColor)}>
+            <option value="">Select a eye color</option>
             <option value="Blue">Blue</option>
             <option value="Brown">Brown</option>
             <option value="Green">Green</option>
@@ -128,6 +130,7 @@ export const UserForm = () => {
           <select id="hairColor"
                   value={hairColor}
                   onChange={(e) => setHairColor(e.target.value as THairColor)}>
+            <option value="">Select a hair color</option>
             <option value="Blond">Blond</option>
             <option value="Dark blond">Dark blond</option>
             <option value="Medium brown">Medium brown</option>

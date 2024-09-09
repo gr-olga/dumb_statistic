@@ -10,23 +10,26 @@ import {getCountryData} from './api';
 function App() {
 
   const currentDate = new Date();
-  const lifeExpectancyForMen = 70;
-  const lifeExpectancyForWomen = 75;
-  const lifeExpectancyIntersex = 73;
-  const [lifeExpectancy, setLifeExpectancy] = useState<number>(lifeExpectancyIntersex);
+  const baseExpectancyIntersex = 73;
+  const [lifeExpectancy, setLifeExpectancy] = useState<number>(baseExpectancyIntersex);
   const userData = useSelector((state: RootState) => state.user);
+  const userCountryId = useSelector((state: RootState) => state.user.user.country.locID);
 
-  console.log('111', userData.user);
+  console.log('111', userCountryId);
 
   useEffect(() => {
-    setLifeExpectancy(userData.user.sex === 'male' ? lifeExpectancyForMen :
-        userData.user.sex === 'female' ? lifeExpectancyForWomen : lifeExpectancyIntersex);
-    console.log('222', userData.user.sex);
-  }, [userData.user.sex, userData.user.name]);
-
-  getCountryData(528).then((res) => {
-    console.log('Country data:', res);
-  });
+    getCountryData(userCountryId).then((data) => {
+          console.log('res', data);
+          if (userData.sex === 'female') {
+            setLifeExpectancy(Math.round(data.lExFemale));
+          } else if (userData.sex === 'male') {
+            setLifeExpectancy(Math.round(data.lExMale));
+          } else {
+            setLifeExpectancy(Math.round(data.lEx));
+          }
+        }
+    );
+  }, [userCountryId]);
 
   return (
       <div className="App">
