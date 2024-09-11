@@ -1,11 +1,12 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import './App.css';
+import styles from './App.module.scss';
 import {WeeksCount} from './components/WeeksCount/WeeksCount';
 import {UserForm} from './components/UserForm/UserForm';
 import {useSelector} from 'react-redux';
 import {RootState} from './store';
 import {getCountryData} from './api';
 import {TDemographicData} from './store/countryState';
+import {AverageLifeData} from './components/AverageLifeData/AverageLifeData';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
   const [lifeExpectancy, setLifeExpectancy] = useState<number>(baseExpectancyIntersex);
   const userData = useSelector((state: RootState) => state.user);
   const userCountryId = useSelector((state: RootState) => state.user.user.country.locID);
+  const [colorful, setColorful] = useState(false);
 
   console.log('111', userCountryId);
 
@@ -48,16 +50,31 @@ function App() {
   }, [userCountryId, calculateLifeExpectancy, getMemoizedCountryData]);
 
   return (
-      <div className="App">
-        <UserForm/>
-        <div>
-          <p> Life expectancy for {userData.user.sex} in {userData.user.country.location} = {lifeExpectancy}</p>
-          <WeeksCount
-              birthData={userData.user.birthDate}
-              currentDate={currentDate}
-              lifeExpectancy={lifeExpectancy}
-          />
+      <div className={styles.App}>
+        <div className={styles.right_col}>
+          <UserForm/>
+          <div>
+            <p className={styles.weeks_count__info}>Do you want to see the average steps in life?</p>
+            <button className={styles.weeks_count__info_button}
+                    onClick={() => setColorful(true)}>
+              Yes
+            </button>
+            {colorful && (
+                <button className={styles.weeks_count__info_button} onClick={() => setColorful(false)}>
+                  Hide
+                </button>
+            )}
+            {colorful && (
+                <AverageLifeData/>
+            )}
+          </div>
         </div>
+        <WeeksCount
+            birthData={userData.user.birthDate}
+            currentDate={currentDate}
+            lifeExpectancy={lifeExpectancy}
+            colorful={colorful}
+        />
       </div>
   );
 }

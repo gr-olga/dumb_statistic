@@ -1,0 +1,55 @@
+// Container for the entire info section
+.info_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #eceae6;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 80%;
+}
+
+// Each item (e.g., Childhood, School, etc.)
+.info_item {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  margin-bottom: 10px;
+
+  &:last-child {
+    margin-bottom: 0; // Remove margin from the last item
+  }
+}
+
+// Text for each life stage
+.info_text {
+  font-size: 1rem;
+  color: #414e54;
+  margin-right: 5px;
+}
+
+// Square color indicator for each life stage
+.color_square {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 576px) {
+  .info_container {
+    padding: 8px;
+  }
+
+  .info_text {
+    font-size: 0.8rem;
+  }
+
+  .color_square {
+    width: 18px;
+    height: 18px;
+  }
+}

@@ -1,0 +1,41 @@
+@import 'variables';
+
+.App {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
+  margin-inline: 40px;
+}
+
+.right_col {
+  width: 50%;
+}
+
+
+.weeks_count__info_button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: $primary-color;
+  color: $text-color;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  margin-right: 10px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    background-color: lighten($primary-color, 10%);
+    box-shadow: $shadow-heavy;
+  }
+}
+
+@media (max-width: 750px) {
+  .App {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+}
