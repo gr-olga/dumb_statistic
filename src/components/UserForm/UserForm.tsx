@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {TEyesColor, THairColor, TUserSex, updateUserData} from '../../store/userState';
+import {TUserSex, updateUserData} from '../../store/userState';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../store';
 import styles from './userForm.module.scss';
@@ -12,11 +12,6 @@ export const UserForm = () => {
   const [name, setName] = useState<string>(currentUser.name);
   const [birthDate, setBirthDate] = useState<number>(currentUser.birthDate);
   const [sex, setSex] = useState<TUserSex>(currentUser.sex);
-  const [weight, setWeight] = useState<number>(currentUser.weight);
-  const [height, setHeight] = useState<number>(currentUser.height);
-  const [eyesColor, setEyesColor] = useState<TEyesColor>(currentUser.eyesColor);
-  const [hairColor, setHairColor] = useState<THairColor>(currentUser.hairColor);
-  const [hobby, setHobby] = useState<string>(currentUser.hobby);
   const [country, setCountry] = useState<TCountry>(currentUser.country);
   const [countriesList, setCountriesList] = useState<Array<TCountry> | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -28,11 +23,6 @@ export const UserForm = () => {
       name,
       birthDate,
       sex,
-      weight,
-      height,
-      eyesColor,
-      hairColor,
-      hobby,
       country
     };
 
@@ -102,52 +92,6 @@ export const UserForm = () => {
             <option value="male">&#x2642;</option>
             <option value="neutral">&#x26A5;  &#x25B3;</option>
           </select>
-          <label htmlFor="weight">Weight</label>
-          <input id="weight"
-                 type="number"
-                 value={weight}
-                 onChange={(e) => setWeight(Number(e.target.value))}/>
-          <label htmlFor="height">Height on cm</label>
-          <input id="height"
-                 type="number"
-                 value={height}
-                 onChange={(e) => setHeight(Number(e.target.value))}/>
-          <label htmlFor="eyesColor">Eyes Color</label>
-          <select id="eyesColor"
-                  value={eyesColor}
-                  onChange={(e) => setEyesColor(e.target.value as TEyesColor)}>
-            <option value="">Select a eye color</option>
-            <option value="Blue">Blue</option>
-            <option value="Brown">Brown</option>
-            <option value="Green">Green</option>
-            <option value="Hazel">Hazel</option>
-            <option value="Amber">Amber</option>
-            <option value="Gray">Gray</option>
-            <option value="Red and violet">Red and violet</option>
-            <option value="Two different color">Two different colors</option>
-          </select>
-          <label htmlFor="hairColor">Hair Color</label>
-          <select id="hairColor"
-                  value={hairColor}
-                  onChange={(e) => setHairColor(e.target.value as THairColor)}>
-            <option value="">Select a hair color</option>
-            <option value="Blond">Blond</option>
-            <option value="Dark blond">Dark blond</option>
-            <option value="Medium brown">Medium brown</option>
-            <option value="Dark brown">Dark brown</option>
-            <option value="Black">Black</option>
-            <option value="Reddish-brow">Reddish-brow</option>
-            <option value="Red">Red</option>
-            <option value="Gray">Gray</option>
-            <option value="White">White</option>
-            <option value="I don't really remember">I don't really remember</option>
-            <option value="Bold">Bold</option>
-          </select>
-          <label htmlFor="hobby">Hobby</label>
-          <input id="hobby"
-                 type="text"
-                 value={hobby}
-                 onChange={(e) => setHobby(e.target.value)}/>
           <button>Submit</button>
         </form>
       </div>

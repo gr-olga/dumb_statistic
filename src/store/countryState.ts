@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-interface TDemographicData {
+ export interface TDemographicData {
   births: number;
   births1519: number;
   cbr: number; // Crude Birth Rate

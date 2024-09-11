@@ -96,8 +96,7 @@ export async function getCountryList() {
 }
 
 // export async function getCountryData(countryId: number) {
-export async function getCountryData() {
-  const countryId = 8;
+export async function getCountryData(countryId: number): Promise<TCountryData | null> {
   const url: string = `${BASE_URL}/countries/${countryId}`;
   const res: AxiosResponse<TCountryData> = await axios.get(url,
       {

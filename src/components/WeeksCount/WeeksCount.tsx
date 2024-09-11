@@ -105,7 +105,7 @@ export const WeeksCount = ({birthData, currentDate, lifeExpectancy}: WeeksCountP
 
   return (
       <div>
-        <h1>WeeksCount</h1>
+        <h1>How many weeks you spent</h1>
         <div>
           <p>Do you want to see a average steps in live?</p>
           <button onClick={() => setColorful(true)}>Yes</button>

@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import './App.css';
 import {WeeksCount} from './components/WeeksCount/WeeksCount';
 import {UserForm} from './components/UserForm/UserForm';
 import {useSelector} from 'react-redux';
 import {RootState} from './store';
 import {getCountryData} from './api';
+import {TDemographicData} from './store/countryState';
 
 
 function App() {
@@ -17,26 +18,40 @@ function App() {
 
   console.log('111', userCountryId);
 
-  useEffect(() => {
-    // getCountryData(userCountryId).then((data) => {
-    getCountryData().then((data) => {
-          console.log('res', data);
-          if (userData.sex === 'female') {
-            setLifeExpectancy(Math.round(data.lExFemale));
-          } else if (userData.sex === 'male') {
-            setLifeExpectancy(Math.round(data.lExMale));
-          } else if (userData.sex === 'neutral') {
-            setLifeExpectancy(Math.round(data.lEx));
-          }
+  const countryId = 8;
+  const getMemoizedCountryData = useCallback(async (countryId: number) => {
+    const data = await getCountryData(countryId);
+    return data;
+  }, []);
+  const calculateLifeExpectancy = useCallback(
+      (data: TDemographicData): number | null => {
+        if (!data) return null;
+        if (userData.sex === 'female') {
+          return Math.round(data.lExFemale);
+        } else if (userData.sex === 'male') {
+          return Math.round(data.lExMale);
+        } else if (userData.sex === 'neutral') {
+          return Math.round(data.lEx);
         }
-    );
-  }, [userCountryId]);
+        return null;
+      }, [userData.sex]);
+
+  useEffect(() => {
+    if (userCountryId) {
+      getMemoizedCountryData(userCountryId).then((data) => {
+        const calculatedLifeExpectancy = calculateLifeExpectancy(data as TDemographicData);
+        if (calculatedLifeExpectancy !== null) {
+          setLifeExpectancy(calculatedLifeExpectancy);
+        }
+      });
+    }
+  }, [userCountryId, calculateLifeExpectancy, getMemoizedCountryData]);
 
   return (
       <div className="App">
         <UserForm/>
         <div>
-          <p> Life expectancy for {userData.user.sex} = {lifeExpectancy}</p>
+          <p> Life expectancy for {userData.user.sex} in {userData.user.country.location} = {lifeExpectancy}</p>
           <WeeksCount
               birthData={userData.user.birthDate}
               currentDate={currentDate}
