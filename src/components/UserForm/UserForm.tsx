@@ -61,7 +61,9 @@ export const UserForm = () => {
   return (
       <div className={styles.user_form}>
         <h1>UserForm</h1>
-        <form onSubmit={handleSubmit}>
+        <form
+            className={styles.form}
+            onSubmit={handleSubmit}>
           <label htmlFor="country">Country</label>
           <select id="country"
                   onChange={handleCountryChange}

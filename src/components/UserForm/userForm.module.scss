@@ -19,9 +19,10 @@
     margin-bottom: 20px;
   }
 
-  form {
+  .form {
     display: flex;
     flex-direction: column;
+    width: 80%;
 
     label {
       margin-bottom: 8px;
@@ -60,4 +61,15 @@
       }
     }
   }
+}
+
+@media (max-width: 750px) {
+  .form {
+    width: 100%;
+    align-self: center;
+  }
+  .user_form {
+    align-items: center;
+  }
+
 }

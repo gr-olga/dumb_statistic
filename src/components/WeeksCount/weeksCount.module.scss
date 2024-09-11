@@ -1,0 +1,110 @@
+@import 'variables';
+
+.weeks_count {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 20px;
+
+  .weeks_count__title {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: $primary-color;
+  }
+
+  .weeks_count__info {
+    font-size: 1rem;
+    color: $text-color;
+    margin: 10px 0;
+  }
+
+  .weeks_count__info_button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: $primary-color;
+    color: $text-color;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      background-color: lighten($primary-color, 10%);
+      box-shadow: $shadow-heavy;
+    }
+  }
+
+  // Container for the entire info section
+  .info_container {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #eceae6;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  // Each item (e.g., Childhood, School, etc.)
+  .info_item {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    margin-bottom: 10px;
+
+    &:last-child {
+      margin-bottom: 0; // Remove margin from the last item
+    }
+  }
+
+  // Text for each life stage
+  .info_text {
+    font-size: 1rem;
+    color: #414e54;
+    margin-right: 5px;
+  }
+
+  // Square color indicator for each life stage
+  .color_square {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+
+  // Media query for smaller screens
+  @media screen and (max-width: 576px) {
+    .info_container {
+      padding: 8px;
+    }
+
+    .info_text {
+      font-size: 0.8rem;
+    }
+
+    .color_square {
+      width: 18px;
+      height: 18px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    width: 90%;
+    margin-left: unset; // Centers the element on smaller screens
+  }
+
+  @media screen and (max-width: 576px) {
+    width: 100%;
+    padding: 10px;
+
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    button {
+      font-size: 0.9rem;
+      padding: 8px 16px;
+    }
+  }
+}

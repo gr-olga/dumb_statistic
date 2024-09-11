@@ -2,6 +2,7 @@ import {getCurrentWeek} from '../../utilas/weeksCalculator';
 import {ReactP5Wrapper} from 'react-p5-wrapper';
 import p5 from 'p5';
 import {useState} from 'react';
+import styles from './weeksCount.module.scss';
 
 interface WeeksCountProps {
   birthData: number;
@@ -102,40 +103,73 @@ export const WeeksCount = ({birthData, currentDate, lifeExpectancy}: WeeksCountP
     };
   };
 
-
   return (
-      <div>
-        <h1>How many weeks you spent</h1>
+      <div className={styles.weeks_count}>
+        <p className={styles.weeks_count__info}>Do you want to see a average steps in live?</p>
+        <button className={styles.weeks_count__info_button}
+                onClick={() => setColorful(true)}>
+          Yes
+        </button>
+        {colorful && <button className={styles.weeks_count__info_button}
+                             onClick={() => setColorful(false)}>
+          Hide
+        </button>}
         <div>
-          <p>Do you want to see a average steps in live?</p>
-          <button onClick={() => setColorful(true)}>Yes</button>
-          <div>
-            {colorful &&
-                <div>
-                  <div>
-                    <p> Childhood: 0-6 years</p>
-                    <div style={{backgroundColor: `rgb(${CHILDHOOD_COLOR})`, width: '20px', height: '20px'}}></div>
-                  </div>
-                  <div>
-                    <p> School: 6-18 years</p>
-                    <div style={{backgroundColor: `rgb(${SCHOOL_COLOR})`, width: '20px', height: '20px'}}></div>
-                  </div>
-                  <div>
-                    <p> University: 18-23 years</p>
-                    <div style={{backgroundColor: `rgb(${UNIVERSITY_COLOR})`, width: '20px', height: '20px'}}></div>
-                  </div>
-                  <div>
-                    <p> Work: 23-60 years</p>
-                    <div style={{backgroundColor: `rgb(${WORK_COLOR})`, width: '20px', height: '20px'}}></div>
-                  </div>
-                  <div>
-                    <p>Retirement: 60+ years</p>
-                    <div style={{backgroundColor: `rgb(${RETIREMENT_COLOR})`, width: '20px', height: '20px'}}></div>
-                  </div>
+          {colorful &&
+              // <div className={styles.info_container}>
+              //   <div className={styles.info_item}>
+              //     <p className={styles.info_item__text}> Childhood: 0-6 years</p>
+              //     <div
+              //         style={{backgroundColor: `rgb(${CHILDHOOD_COLOR})`, width: '20px', height: '20px'}}></div>
+              //   </div>
+              //   <div>
+              //     <p> School: 6-18 years</p>
+              //     <div style={{backgroundColor: `rgb(${SCHOOL_COLOR})`, width: '20px', height: '20px'}}></div>
+              //   </div>
+              //   <div>
+              //     <p> University: 18-23 years</p>
+              //     <div style={{backgroundColor: `rgb(${UNIVERSITY_COLOR})`, width: '20px', height: '20px'}}></div>
+              //   </div>
+              //   <div>
+              //     <p> Work: 23-60 years</p>
+              //     <div style={{backgroundColor: `rgb(${WORK_COLOR})`, width: '20px', height: '20px'}}></div>
+              //   </div>
+              //   <div>
+              //     <p>Retirement: 60+ years</p>
+              //     <div style={{backgroundColor: `rgb(${RETIREMENT_COLOR})`, width: '20px', height: '20px'}}></div>
+              //   </div>
+              // </div>
+              <div className={styles.info_container}>
+                <div className={styles.info_item}>
+                  <p className={styles.info_text}>Childhood: 0-6 years</p>
+                  <div className={styles.color_square} style={{backgroundColor: `rgb(${CHILDHOOD_COLOR})`}}></div>
                 </div>
-            }
-          </div>
+
+                <div className={styles.info_item}>
+                  <p className={styles.info_text}>School: 6-18 years</p>
+                  <div className={styles.color_square} style={{backgroundColor: `rgb(${SCHOOL_COLOR})`}}></div>
+                </div>
+
+                <div className={styles.info_item}>
+                  <p className={styles.info_text}>University: 18-23 years</p>
+                  <div className={styles.color_square} style={{backgroundColor: `rgb(${UNIVERSITY_COLOR})`}}></div>
+                </div>
+
+                <div className={styles.info_item}>
+                  <p className={styles.info_text}>Work: 23-60 years</p>
+                  <div className={styles.color_square} style={{backgroundColor: `rgb(${WORK_COLOR})`}}></div>
+                </div>
+
+                <div className={styles.info_item}>
+                  <p className={styles.info_text}>Retirement: 60+ years</p>
+                  <div className={styles.color_square} style={{backgroundColor: `rgb(${RETIREMENT_COLOR})`}}></div>
+                </div>
+              </div>
+
+          }
         </div>
+
+        <h1 className={styles.weeks_count__title}>How many weeks you spent</h1>
         <ReactP5Wrapper sketch={sketch}/>
       </div>
   );
