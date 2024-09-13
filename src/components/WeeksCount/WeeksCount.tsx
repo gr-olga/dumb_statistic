@@ -1,9 +1,7 @@
 import {getCurrentWeek} from '../../utilas/weeksCalculator';
 import {ReactP5Wrapper} from 'react-p5-wrapper';
 import p5 from 'p5';
-import {useState} from 'react';
 import styles from './weeksCount.module.scss';
-import {AverageLifeData} from '../AverageLifeData/AverageLifeData';
 
 interface WeeksCountProps {
   birthData: number;
@@ -120,24 +118,6 @@ export const WeeksCount = ({birthData, currentDate, lifeExpectancy, colorful}: W
 
   return (
       <div className={styles.weeks_count}>
-        {/*<div>*/}
-        {/*<p className={styles.weeks_count__info}>Do you want to see the average steps in life?</p>*/}
-        {/*<button className={styles.weeks_count__info_button}*/}
-        {/*        onClick={() => setColorful(true)}>*/}
-        {/*  Yes*/}
-        {/*</button>*/}
-        {/*{colorful && (*/}
-        {/*    <button className={styles.weeks_count__info_button} onClick={() => setColorful(false)}>*/}
-        {/*      Hide*/}
-        {/*    </button>*/}
-        {/*)}*/}
-        {/*<div>*/}
-        {/*  {colorful && (*/}
-        {/*      <AverageLifeData/>*/}
-        {/*  )}*/}
-        {/*</div>*/}
-        {/*</div>*/}
-
         <h1 className={styles.weeks_count__title}>How many weeks you spent</h1>
         <ReactP5Wrapper sketch={sketch}/>
       </div>

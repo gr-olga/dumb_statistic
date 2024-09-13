@@ -53,6 +53,7 @@ function App() {
       <div className={styles.App}>
         <div className={styles.right_col}>
           <UserForm/>
+          <h6>Life expectancy in {userData.user.country.location} for {userData.user.sex} is {lifeExpectancy}</h6>
           <div>
             <p className={styles.weeks_count__info}>Do you want to see the average steps in life?</p>
             <button className={styles.weeks_count__info_button}

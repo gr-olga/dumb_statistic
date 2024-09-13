@@ -16,6 +16,30 @@ export const UserForm = () => {
   const [countriesList, setCountriesList] = useState<Array<TCountry> | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  useEffect(() => {
+    async function fetchCountries() {
+      const storedCountries = localStorage.getItem('countriesList');
+
+      if (storedCountries) {
+        setCountriesList(JSON.parse(storedCountries));
+      } else {
+        try {
+          const data = await getCountryList();
+          setCountriesList(data);
+          localStorage.setItem('countriesList', JSON.stringify(data)); // Save the data to localStorage
+        } catch (error) {
+          if (error instanceof Error) {
+            setError(error.message);
+          } else {
+            setError('An unknown error occurred');
+          }
+        }
+      }
+    }
+
+    fetchCountries();
+  }, []);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -30,25 +54,6 @@ export const UserForm = () => {
 
     console.log('user', updatedUser);
   };
-
-
-  useEffect(() => {
-    async function fetchCountries() {
-      try {
-        const data = await getCountryList();
-        setCountriesList(data);
-      } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);  // Access message safely
-        } else {
-          setError('An unknown error occurred');  // Handle non-Error types
-        }
-      }
-    }
-
-    fetchCountries();
-  }, []);
-
 
   const handleCountryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const locID = Number(event.target.value);
@@ -69,9 +74,9 @@ export const UserForm = () => {
                   onChange={handleCountryChange}
           >
             <option value="">Select a country</option>
-            {countriesList && countriesList.map((item, index) => {
-              return <option key={item.locID} value={item.locID}>{item.location} </option>;
-            })}
+            {countriesList && countriesList.map((item) => (
+                <option key={item.locID} value={item.locID}>{item.location}</option>
+            ))}
           </select>
           <label htmlFor="username">Name</label>
           <input id="name"
