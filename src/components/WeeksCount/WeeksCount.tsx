@@ -1,6 +1,7 @@
 import {getCurrentWeek} from '../../utilas/weeksCalculator';
 import {ReactP5Wrapper} from 'react-p5-wrapper';
 import p5 from 'p5';
+import {useRef} from 'react';
 import styles from './weeksCount.module.scss';
 
 interface WeeksCountProps {
@@ -26,6 +27,9 @@ export const WeeksCount = ({birthData, currentDate, lifeExpectancy, colorful}: W
 
   const years = lifeExpectancy;
   const weeksPerYear = 52;
+
+  // Step 1: Use a ref to store the p5 instance
+  const p5Ref = useRef<p5 | null>(null);
 
   const sketch = (p: p5) => {
     let squareSize: number;
@@ -114,12 +118,23 @@ export const WeeksCount = ({birthData, currentDate, lifeExpectancy, colorful}: W
         }
       }
     };
+
+    // Assign the p5 instance to the ref
+    p5Ref.current = p;
+  };
+
+  // Step 2: Use the ref to trigger the save function
+  const downloadImage = () => {
+    if (p5Ref.current) {
+      p5Ref.current.saveCanvas('life-grid', 'png');
+    }
   };
 
   return (
       <div className={styles.weeks_count}>
         <h1 className={styles.weeks_count__title}>How many weeks you spent</h1>
         <ReactP5Wrapper sketch={sketch}/>
+        <button onClick={downloadImage} className={styles.download_button}>Download as Image</button>
       </div>
   );
 };

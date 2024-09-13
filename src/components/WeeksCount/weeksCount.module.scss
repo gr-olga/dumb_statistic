@@ -17,6 +17,20 @@
     color: $text-color;
     margin: 10px 0;
   }
+  .download_button {
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: $primary-color;;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #45a049;
+    }
+  }
 
 
 
