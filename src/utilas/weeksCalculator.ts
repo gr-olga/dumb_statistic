@@ -1,5 +1,5 @@
 
-export function getCurrentWeek(): number {
+export function getCurrentYearWeek(): number {
   const today = new Date();
   const startOfYear = new Date(today.getFullYear(), 0, 1); // January 1st of the current year
   const dayOfYear = Math.floor((today.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24)) + 1;

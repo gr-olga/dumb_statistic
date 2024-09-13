@@ -1,4 +1,4 @@
-import {getCurrentWeek} from '../../utilas/weeksCalculator';
+import {getCurrentYearWeek, weeksCalculator} from '../../utilas/weeksCalculator';
 import {ReactP5Wrapper} from 'react-p5-wrapper';
 import p5 from 'p5';
 import {useRef} from 'react';
@@ -9,6 +9,7 @@ interface WeeksCountProps {
   currentDate: Date;
   lifeExpectancy: number;
   colorful: boolean;
+  name: string;
 }
 
 // Define constants for colors representing life periods
@@ -20,9 +21,9 @@ export const RETIREMENT_COLOR = [143, 173, 178];
 const TEXT_COLOR = [0, 0, 0];
 
 
-export const WeeksCount = ({birthData, currentDate, lifeExpectancy, colorful}: WeeksCountProps) => {
+export const WeeksCount = ({birthData, currentDate, lifeExpectancy, colorful, name}: WeeksCountProps) => {
   const currentAge = Math.floor((currentDate.getTime() - birthData) / 1000 / 60 / 60 / 24 / 365);
-  const currentWeek = getCurrentWeek();
+  const currentWeek = getCurrentYearWeek();
 
 
   const years = lifeExpectancy;
@@ -130,9 +131,11 @@ export const WeeksCount = ({birthData, currentDate, lifeExpectancy, colorful}: W
     }
   };
 
+  const allLifeWeeks = weeksCalculator(birthData, currentDate);
+
   return (
       <div className={styles.weeks_count}>
-        <h1 className={styles.weeks_count__title}>How many weeks you spent</h1>
+        <h1 className={styles.weeks_count__title}>{name} you have already lived {allLifeWeeks} weeks</h1>
         <ReactP5Wrapper sketch={sketch}/>
         <button onClick={downloadImage} className={styles.download_button}>Download as Image</button>
       </div>

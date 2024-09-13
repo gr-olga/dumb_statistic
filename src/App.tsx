@@ -89,6 +89,7 @@ function App() {
                   currentDate={currentDate}
                   lifeExpectancy={lifeExpectancy}
                   colorful={colorful}
+                  name={userData.user.name}
               />
             </div>
         )}

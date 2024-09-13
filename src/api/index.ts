@@ -79,12 +79,9 @@ interface TCountryData {
   tpopulation1July: number;
   tpopulationMale1July: number;
   tpopulationFemale1July: number;
-
-
 }
 
 export async function getCountryList() {
-
   const url: string = `${BASE_URL}/countries`;
   const res: AxiosResponse<Array<TCountry>> = await axios.get(url, {
     headers: {
@@ -95,7 +92,6 @@ export async function getCountryList() {
   return res.data;
 }
 
-// export async function getCountryData(countryId: number) {
 export async function getCountryData(countryId: number): Promise<TCountryData | null> {
   const url: string = `${BASE_URL}/countries/${countryId}`;
   const res: AxiosResponse<TCountryData> = await axios.get(url,
