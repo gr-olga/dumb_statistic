@@ -7,12 +7,22 @@
   margin-inline: 40px;
 }
 
+.App_start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-inline: auto;
+  margin-top: 100px;
+  width: 50%;
+}
+
 .right_col {
   width: 50%;
 }
 
 
-.weeks_count__info_button {
+.info_button {
   padding: 10px 20px;
   font-size: 1rem;
   background-color: $primary-color;

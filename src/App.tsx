@@ -17,8 +17,9 @@ function App() {
   const userData = useSelector((state: RootState) => state.user);
   const userCountryId = useSelector((state: RootState) => state.user.user.country.locID);
   const [colorful, setColorful] = useState(false);
+  const [start, setStart] = useState<boolean>(false);
 
-  console.log('111', userCountryId);
+  console.log('start', start);
 
   const countryId = 8;
   const getMemoizedCountryData = useCallback(async (countryId: number) => {
@@ -50,33 +51,48 @@ function App() {
   }, [userCountryId, calculateLifeExpectancy, getMemoizedCountryData]);
 
   return (
-      <div className={styles.App}>
-        <div className={styles.right_col}>
-          <UserForm/>
-          <h6>Life expectancy in {userData.user.country.location} for {userData.user.sex} is {lifeExpectancy}</h6>
-          <div>
-            <p className={styles.weeks_count__info}>Do you want to see the average steps in life?</p>
-            <button className={styles.weeks_count__info_button}
-                    onClick={() => setColorful(true)}>
-              Yes
-            </button>
-            {colorful && (
-                <button className={styles.weeks_count__info_button} onClick={() => setColorful(false)}>
-                  Hide
-                </button>
-            )}
-            {colorful && (
-                <AverageLifeData/>
-            )}
-          </div>
-        </div>
-        <WeeksCount
-            birthData={userData.user.birthDate}
-            currentDate={currentDate}
-            lifeExpectancy={lifeExpectancy}
-            colorful={colorful}
-        />
-      </div>
+      <>
+        {!start && (
+            <div className={styles.App_start}>
+              <p>Fill your data and see how many weeks on your life you already spent and maybe there is still some left
+                considering the average life expectancy in your country</p>
+              <button
+                  className={styles.info_button}
+                  onClick={() => setStart(true)}
+              >Start
+              </button>
+            </div>
+        )}
+        {start && (
+            <div className={styles.App}>
+              <div className={styles.right_col}>
+                <UserForm/>
+                <h6>Life expectancy in {userData.user.country.location} for {userData.user.sex} is {lifeExpectancy}</h6>
+                <div>
+                  <p className={styles.weeks_count__info}>Do you want to see the average steps in life?</p>
+                  <button className={styles.info_button}
+                          onClick={() => setColorful(true)}>
+                    Yes
+                  </button>
+                  {colorful && (
+                      <button className={styles.info_button} onClick={() => setColorful(false)}>
+                        Hide
+                      </button>
+                  )}
+                  {colorful && (
+                      <AverageLifeData/>
+                  )}
+                </div>
+              </div>
+              <WeeksCount
+                  birthData={userData.user.birthDate}
+                  currentDate={currentDate}
+                  lifeExpectancy={lifeExpectancy}
+                  colorful={colorful}
+              />
+            </div>
+        )}
+      </>
   );
 }
 
