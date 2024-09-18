@@ -124,10 +124,34 @@ export const WeeksCount = ({birthData, currentDate, lifeExpectancy, colorful, na
     p5Ref.current = p;
   };
 
-  // Step 2: Use the ref to trigger the save function
+  // Function to download the image
   const downloadImage = () => {
     if (p5Ref.current) {
       p5Ref.current.saveCanvas('life-grid', 'png');
+    }
+  };
+
+  // Share functions for social media
+  const shareOnFacebook = (imageData: string) => {
+    const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(imageData)}`;
+    window.open(shareUrl, '_blank');
+  };
+
+  const shareOnTwitter = (imageData: string) => {
+    const shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(imageData)}&text=Check out my life grid!`;
+    window.open(shareUrl, '_blank');
+  };
+
+  // Function to download the image and share it
+  const downloadImageAndShare = () => {
+    if (p5Ref.current) {
+      const canvas = (p5Ref.current as any)._renderer.canvas;
+      if (canvas) {
+        const imageData = canvas.toDataURL("image/png");
+        // You can now use imageData to share on social media
+        shareOnFacebook(imageData);
+        shareOnTwitter(imageData);
+      }
     }
   };
 
@@ -135,9 +159,15 @@ export const WeeksCount = ({birthData, currentDate, lifeExpectancy, colorful, na
 
   return (
       <div className={styles.weeks_count}>
-        <h1 className={styles.weeks_count__title}>{name} you have already lived {allLifeWeeks} weeks</h1>
+      <h1 className={styles.weeks_count__title}>
+        {name}, you have already lived {allLifeWeeks} weeks
+      </h1>
         <ReactP5Wrapper sketch={sketch}/>
         <button onClick={downloadImage} className={styles.download_button}>Download as Image</button>
+      <div className={styles.share_buttons}>
+        {/*<button onClick={downloadImageAndShare} className={styles.share_button}>Share on Facebook</button>*/}
+        {/*<button onClick={downloadImageAndShare} className={styles.share_button}>Share on Twitter</button>*/}
+      </div>
       </div>
   );
 };

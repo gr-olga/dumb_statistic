@@ -17,6 +17,7 @@
     color: $text-color;
     margin: 10px 0;
   }
+
   .download_button {
     margin-top: 20px;
     padding: 10px 15px;
@@ -32,6 +33,20 @@
     }
   }
 
+  .share_buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .share_button:nth-child(2) {
+    background-color: #1DA1F2; /* Twitter color */
+  }
+
+  .share_button:hover, .download_button:hover {
+    opacity: 0.8;
+  }
 
 
   @media screen and (max-width: 768px) {
