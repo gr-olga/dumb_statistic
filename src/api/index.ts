@@ -1,8 +1,7 @@
 import axios, {AxiosResponse} from 'axios';
 
-// const BASE_URL: string = 'https://world-demographics.p.rapidapi.com';
-
-const BASE_URL: string = 'http://localhost:3001/api';
+const BASE_URL: string = 'https://world-demographics.p.rapidapi.com';
+// const BASE_URL: string = 'http://localhost:3001/api';
 const apiKey: string | undefined = process.env.REACT_APP_API_KEY;
 
 export interface TCountry {
@@ -88,7 +87,7 @@ export async function getCountryList() {
       'x-rapidapi-key': apiKey,
       'x-rapidapi-host': 'world-demographics.p.rapidapi.com'
     }
-  })
+  });
   return res.data;
 }
 
