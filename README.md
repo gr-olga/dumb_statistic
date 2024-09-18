@@ -3,6 +3,13 @@
 Create a simple personal statistic compare with world average.
 
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
+Copyright (c) 2024 Gr-Olga. See my GitHub profile [here](https://github.com/gr-olga).
+
+
 ### `npm start`
 
 Runs the app in the development mode.\

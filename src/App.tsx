@@ -7,6 +7,7 @@ import {RootState} from './store';
 import {getCountryData} from './api';
 import {TDemographicData} from './store/countryState';
 import {AverageLifeData} from './components/AverageLifeData/AverageLifeData';
+import {Footer} from './components/Footer/Footer';
 
 
 function App() {
@@ -93,6 +94,7 @@ function App() {
               />
             </div>
         )}
+        <Footer/>
       </>
   );
 }
