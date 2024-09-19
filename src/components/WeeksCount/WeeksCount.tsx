@@ -36,14 +36,18 @@ export const WeeksCount = ({birthData, currentDate, lifeExpectancy, colorful, na
     let squareSize: number;
     let canvasWidth: number;
     let canvasHeight: number;
-    const xOffset = 90;
-    const yOffset = 70;
+    // const xOffset = 90;
+    // const yOffset = 70;
+    const xOffset = 55;
+    const yOffset = 35;
 
     p.setup = () => {
       // Set the square size dynamically based on window width
       squareSize = p.map(p.windowWidth, 320, 1920, 5, 10);
+      console.log('p.windowWidth,', p.windowWidth);
       canvasWidth = weeksPerYear * squareSize + xOffset * 2;
       canvasHeight = years * squareSize + yOffset * 2;
+
 
       p.createCanvas(canvasWidth, canvasHeight);
       p.noLoop();

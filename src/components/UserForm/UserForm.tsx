@@ -65,7 +65,7 @@ export const UserForm = () => {
 
   return (
       <div className={styles.user_form}>
-        <h1>UserForm</h1>
+        <h1>Enter your data</h1>
         <form
             className={styles.form}
             onSubmit={handleSubmit}>

@@ -34,18 +34,43 @@
   margin-right: 10px;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: lighten($primary-color, 10%);
     box-shadow: $shadow-heavy;
   }
+
+  &:active {
+    background-color: darken($primary-color, 10%);
+    transform: scale(0.98);
+  }
 }
+
 
 @media (max-width: 750px) {
   .App {
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    margin-inline: 20px;
+    padding: 10px;
+  }
+
+  .App_start {
+    width: 100%;
+    margin-top: 50px;
+  }
+
+  .right_col {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .info_button {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2rem;
+    margin-top: 10px;
+    margin-right: 0;
   }
 }
