@@ -1,6 +1,7 @@
 {
   "name": "dumb_statistic",
   "version": "0.1.1",
+  "homepage": "https://gr-olga.github.io/dumb-statistic",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
@@ -14,6 +15,7 @@
     "@types/react-dom": "^18.3.0",
     "@types/react-redux": "^7.1.33",
     "axios": "^1.7.4",
+    "gh-pages": "^6.1.1",
     "p5": "^1.10.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -28,7 +30,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
