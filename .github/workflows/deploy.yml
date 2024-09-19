@@ -1,0 +1,25 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '22.2.0' # Версия Node.js
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build and Deploy the project
+        run: npm run deploy # This will build the project and deploy to gh-pages
