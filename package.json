@@ -1,7 +1,7 @@
 {
   "name": "dumb_statistic",
   "version": "0.1.1",
-  "homepage": "https://gr-olga.github.io/dumb-statistic",
+  "homepage": "https://gr-olga.github.io/dumb_statistic",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
