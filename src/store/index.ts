@@ -1,10 +1,10 @@
-import {configureStore, EnhancedStore} from '@reduxjs/toolkit';
-import userReducer from './userState';
+import { configureStore, EnhancedStore } from "@reduxjs/toolkit";
+import userReducer from "./userState";
 
 const store: EnhancedStore = configureStore({
   reducer: {
-    user: userReducer
-  }
+    user: userReducer,
+  },
 });
 
 export type AppDispatch = typeof store.dispatch;

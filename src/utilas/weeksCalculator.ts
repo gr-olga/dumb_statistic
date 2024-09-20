@@ -1,8 +1,10 @@
-
 export function getCurrentYearWeek(): number {
   const today = new Date();
   const startOfYear = new Date(today.getFullYear(), 0, 1); // January 1st of the current year
-  const dayOfYear = Math.floor((today.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+  const dayOfYear =
+    Math.floor(
+      (today.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24),
+    ) + 1;
   return Math.ceil(dayOfYear / 7);
 }
 
@@ -29,4 +31,3 @@ export function daysCalculator(userAge: number): number {
   const leapYears = countLeapYears(birthYear);
   return userAge * 365 + leapYears;
 }
-

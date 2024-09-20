@@ -1,14 +1,14 @@
-import axios, {AxiosResponse} from 'axios';
+import axios, { AxiosResponse } from "axios";
 
-const BASE_URL: string = 'https://world-demographics.p.rapidapi.com';
+const BASE_URL: string = "https://world-demographics.p.rapidapi.com";
 // const BASE_URL: string = 'http://localhost:3001/api';
 const apiKey: string | undefined = process.env.REACT_APP_API_KEY;
 
 export interface TCountry {
-  'locID': number,
-  'location': string,
-  'iso2Code': string,
-  'iso3Code': string
+  locID: number;
+  location: string;
+  iso2Code: string;
+  iso3Code: string;
 }
 
 interface TCountryData {
@@ -84,33 +84,38 @@ export async function getCountryList() {
   const url: string = `${BASE_URL}/countries`;
   const res: AxiosResponse<Array<TCountry>> = await axios.get(url, {
     headers: {
-      'x-rapidapi-key': apiKey,
-      'x-rapidapi-host': 'world-demographics.p.rapidapi.com'
-    }
+      "x-rapidapi-key": apiKey,
+      "x-rapidapi-host": "world-demographics.p.rapidapi.com",
+    },
   });
   return res.data;
 }
 
-export async function getCountryData(countryId: number): Promise<TCountryData | null> {
+export async function getCountryData(
+  countryId: number,
+): Promise<TCountryData | null> {
   const url: string = `${BASE_URL}/countries/${countryId}`;
-  const res: AxiosResponse<TCountryData> = await axios.get(url,
-      {
-        headers: {
-          'x-rapidapi-key': apiKey,
-          'x-rapidapi-host': 'world-demographics.p.rapidapi.com'
-          // 'Access-Control-Allow-Origin': '*',
-          // 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
-        }
-        //TODO: fix any
-      }).catch((error: any) => {
-    console.error('Error:', error.message);
-    return {data: {} as TCountryData} as AxiosResponse<TCountryData>;
-  });
+  const res: AxiosResponse<TCountryData> = await axios
+    .get(url, {
+      headers: {
+        "x-rapidapi-key": apiKey,
+        "x-rapidapi-host": "world-demographics.p.rapidapi.com",
+        // 'Access-Control-Allow-Origin': '*',
+        // 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+      },
+      //TODO: fix any
+    })
+    .catch((error: any) => {
+      console.error("Error:", error.message);
+      return { data: {} as TCountryData } as AxiosResponse<TCountryData>;
+    });
   const currentYear = new Date().getFullYear();
   const targetYear = currentYear - 2;
   //TODO: find better solution
   // const actualData = res.data.find((item: TCountryData) => item.time === targetYear)
-  const actualData = Array.isArray(res.data) ? res.data.find((item: TCountryData) => item.time === targetYear) : null;
+  const actualData = Array.isArray(res.data)
+    ? res.data.find((item: TCountryData) => item.time === targetYear)
+    : null;
 
   return actualData;
 }

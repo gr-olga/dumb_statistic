@@ -1,41 +1,40 @@
-import {createSlice, PayloadAction, Slice} from '@reduxjs/toolkit';
-import {TCountry} from '../api';
+import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
+import { TCountry } from "../api";
 
-export type TUserSex = 'female' | 'male' | 'neutral';
+export type TUserSex = "female" | "male" | "neutral";
 
 export interface UserState {
   user: {
     name: string;
     birthDate: number;
     sex: TUserSex;
-    country: TCountry
+    country: TCountry;
   };
 }
 
 const initialState: UserState = {
   user: {
-    name: 'Mohammed',
+    name: "Mohammed",
     birthDate: new Date(1994, 5, 14).getTime(),
-    sex: 'female',
+    sex: "female",
     country: {
-      'locID': 8,
-      'location': 'Albania',
-      'iso2Code': 'AL',
-      'iso3Code': 'ALB'
-    }
-  }
+      locID: 8,
+      location: "Albania",
+      iso2Code: "AL",
+      iso3Code: "ALB",
+    },
+  },
 };
 
 const userSlice: Slice<UserState> = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
-    updateUserData(state, action: PayloadAction<UserState['user']>) {
+    updateUserData(state, action: PayloadAction<UserState["user"]>) {
       state.user = action.payload;
-    }
-  }
+    },
+  },
 });
 
-
-export const {updateUserData} = userSlice.actions;
+export const { updateUserData } = userSlice.actions;
 export default userSlice.reducer;

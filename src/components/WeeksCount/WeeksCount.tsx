@@ -1,8 +1,11 @@
-import {getCurrentYearWeek, weeksCalculator} from '../../utilas/weeksCalculator';
-import {ReactP5Wrapper} from 'react-p5-wrapper';
-import p5 from 'p5';
-import {useRef} from 'react';
-import styles from './weeksCount.module.scss';
+import {
+  getCurrentYearWeek,
+  weeksCalculator,
+} from "../../utilas/weeksCalculator";
+import { ReactP5Wrapper } from "react-p5-wrapper";
+import p5 from "p5";
+import { useRef } from "react";
+import styles from "./weeksCount.module.scss";
 
 interface WeeksCountProps {
   birthData: number;
@@ -20,11 +23,17 @@ export const WORK_COLOR = [210, 160, 130];
 export const RETIREMENT_COLOR = [143, 173, 178];
 const TEXT_COLOR = [0, 0, 0];
 
-
-export const WeeksCount = ({birthData, currentDate, lifeExpectancy, colorful, name}: WeeksCountProps) => {
-  const currentAge = Math.floor((currentDate.getTime() - birthData) / 1000 / 60 / 60 / 24 / 365);
+export const WeeksCount = ({
+  birthData,
+  currentDate,
+  lifeExpectancy,
+  colorful,
+  name,
+}: WeeksCountProps) => {
+  const currentAge = Math.floor(
+    (currentDate.getTime() - birthData) / 1000 / 60 / 60 / 24 / 365,
+  );
   const currentWeek = getCurrentYearWeek();
-
 
   const years = lifeExpectancy;
   const weeksPerYear = 52;
@@ -44,10 +53,9 @@ export const WeeksCount = ({birthData, currentDate, lifeExpectancy, colorful, na
     p.setup = () => {
       // Set the square size dynamically based on window width
       squareSize = p.map(p.windowWidth, 320, 1920, 5, 10);
-      console.log('p.windowWidth,', p.windowWidth);
+      console.log("p.windowWidth,", p.windowWidth);
       canvasWidth = weeksPerYear * squareSize + xOffset * 2;
       canvasHeight = years * squareSize + yOffset * 2;
-
 
       p.createCanvas(canvasWidth, canvasHeight);
       p.noLoop();
@@ -131,47 +139,49 @@ export const WeeksCount = ({birthData, currentDate, lifeExpectancy, colorful, na
   // Function to download the image
   const downloadImage = () => {
     if (p5Ref.current) {
-      p5Ref.current.saveCanvas('life-grid', 'png');
+      p5Ref.current.saveCanvas("life-grid", "png");
     }
   };
 
   // Share functions for social media
-  const shareOnFacebook = (imageData: string) => {
-    const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(imageData)}`;
-    window.open(shareUrl, '_blank');
-  };
-
-  const shareOnTwitter = (imageData: string) => {
-    const shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(imageData)}&text=Check out my life grid!`;
-    window.open(shareUrl, '_blank');
-  };
-
-  // Function to download the image and share it
-  const downloadImageAndShare = () => {
-    if (p5Ref.current) {
-      const canvas = (p5Ref.current as any)._renderer.canvas;
-      if (canvas) {
-        const imageData = canvas.toDataURL("image/png");
-        // You can now use imageData to share on social media
-        shareOnFacebook(imageData);
-        shareOnTwitter(imageData);
-      }
-    }
-  };
+  // const shareOnFacebook = (imageData: string) => {
+  //   const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(imageData)}`;
+  //   window.open(shareUrl, '_blank');
+  // };
+  //
+  // const shareOnTwitter = (imageData: string) => {
+  //   const shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(imageData)}&text=Check out my life grid!`;
+  //   window.open(shareUrl, '_blank');
+  // };
+  //
+  // // Function to download the image and share it
+  // const downloadImageAndShare = () => {
+  //   if (p5Ref.current) {
+  //     const canvas = (p5Ref.current as any)._renderer.canvas;
+  //     if (canvas) {
+  //       const imageData = canvas.toDataURL("image/png");
+  //       // You can now use imageData to share on social media
+  //       shareOnFacebook(imageData);
+  //       shareOnTwitter(imageData);
+  //     }
+  //   }
+  // };
 
   const allLifeWeeks = weeksCalculator(birthData, currentDate);
 
   return (
-      <div className={styles.weeks_count}>
+    <div className={styles.weeks_count}>
       <h1 className={styles.weeks_count__title}>
         {name}, you have already lived {allLifeWeeks} weeks
       </h1>
-        <ReactP5Wrapper sketch={sketch}/>
-        <button onClick={downloadImage} className={styles.download_button}>Download as Image</button>
+      <ReactP5Wrapper sketch={sketch} />
+      <button onClick={downloadImage} className={styles.download_button}>
+        Download as Image
+      </button>
       <div className={styles.share_buttons}>
         {/*<button onClick={downloadImageAndShare} className={styles.share_button}>Share on Facebook</button>*/}
         {/*<button onClick={downloadImageAndShare} className={styles.share_button}>Share on Twitter</button>*/}
       </div>
-      </div>
+    </div>
   );
 };

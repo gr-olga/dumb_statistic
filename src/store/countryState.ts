@@ -1,6 +1,6 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
- export interface TDemographicData {
+export interface TDemographicData {
   births: number;
   births1519: number;
   cbr: number; // Crude Birth Rate
@@ -69,7 +69,6 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
   variant: string;
 }
 
-
 const initialState: TDemographicData = {
   births: 0,
   births1519: 0,
@@ -82,8 +81,8 @@ const initialState: TDemographicData = {
   doublingTime: null,
   imr: 0,
   infantDeaths: 0,
-  iso2Code: '',
-  iso3Code: '',
+  iso2Code: "",
+  iso3Code: "",
   lEx: 0,
   lExFemale: 0,
   lExMale: 0,
@@ -99,14 +98,14 @@ const initialState: TDemographicData = {
   le80Male: 0,
   locID: 0,
   locTypeID: 0,
-  locTypeName: '',
-  location: '',
+  locTypeName: "",
+  location: "",
   mac: 0,
   medianAgePop: 0,
   natChange: 0,
   natChangeRT: 0,
   netMigrations: 0,
-  notes: '',
+  notes: "",
   nrr: 0,
   parentID: 0,
   popChange: 0,
@@ -136,23 +135,22 @@ const initialState: TDemographicData = {
   tpopulationMale1July: 0,
   under5Deaths: 0,
   varID: 0,
-  variant: ''
+  variant: "",
 };
-
 
 // Create the user slice
 export const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
     setCountryData(state, action: PayloadAction<TDemographicData>) {
-      return {...state, ...action.payload};
+      return { ...state, ...action.payload };
     },
     resetData(state) {
-      return {...initialState};
-    }
-  }
+      return { ...initialState };
+    },
+  },
 });
 
-export const {setCountryData, resetData} = userSlice.actions;
+export const { setCountryData, resetData } = userSlice.actions;
 export default userSlice.reducer;
