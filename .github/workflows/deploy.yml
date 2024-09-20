@@ -16,19 +16,16 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '22.2.0' # Версия Node.js
+          node-version: '22.x' # Версия Node.js
 
       - name: Install dependencies
         run: npm install
 
-      - name: prettier the project
-        run: npm prettier
+      - name: Prettier the project
+        run: npm run prettier # Corrected to use npm run
 
-      - name: lint the project
-        run: npm lint
-
-      - name: Build the project
-        run: npm run predeploy # This will build the project
+      - name: Lint the project
+        run: npm run lint # Corrected to use npm run
 
       - name: Build and Deploy the project
         run: npm run deploy # This will build the project and deploy to gh-pages
