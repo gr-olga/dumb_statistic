@@ -58,7 +58,8 @@ function App() {
     getCountryData(userCountryId).then((data) => {
       dispatch(setCountryData(data as TDemographicData));
     });
-  }, [userCountryId]);
+  }, [userCountryId, dispatch]);
+
 
   useEffect(() => {
     setLifeExpectancy(calculateLifeExpectancy(countryData, userData.sex));

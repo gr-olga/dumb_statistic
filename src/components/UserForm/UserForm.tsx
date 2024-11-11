@@ -4,7 +4,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../store';
 import styles from './userForm.module.scss';
 import {getCountryList, TCountry} from '../../api';
-import {setCountryData} from '../../store/countryState';
 
 export const UserForm = () => {
   const dispatch: AppDispatch = useDispatch();
