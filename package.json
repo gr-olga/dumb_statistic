@@ -34,7 +34,7 @@
     "prettier": "prettier --write src/**/*.{ts,tsx}",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "git config user.email 'gr.olla.pan@gmail.com' && git config user.name 'gr-olga' && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -55,6 +55,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "ajv": "^7.2.4",
     "prettier": "3.3.3"
   }
