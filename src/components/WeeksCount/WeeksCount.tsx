@@ -1,16 +1,13 @@
-import {
-  getCurrentYearWeek,
-  weeksCalculator,
-} from "../../utilas/weeksCalculator";
-import { ReactP5Wrapper } from "react-p5-wrapper";
-import p5 from "p5";
-import { useRef } from "react";
-import styles from "./weeksCount.module.scss";
+import {getCurrentYearWeek, weeksCalculator} from '../../utilas/weeksCalculator';
+import {ReactP5Wrapper} from 'react-p5-wrapper';
+import p5 from 'p5';
+import {useRef} from 'react';
+import styles from './weeksCount.module.scss';
 
 interface WeeksCountProps {
   birthData: number;
   currentDate: Date;
-  lifeExpectancy: number;
+  lifeExpectancy: number | void;
   colorful: boolean;
   name: string;
 }
@@ -24,18 +21,18 @@ export const RETIREMENT_COLOR = [143, 173, 178];
 const TEXT_COLOR = [0, 0, 0];
 
 export const WeeksCount = ({
-  birthData,
-  currentDate,
-  lifeExpectancy,
-  colorful,
-  name,
-}: WeeksCountProps) => {
+                             birthData,
+                             currentDate,
+                             lifeExpectancy,
+                             colorful,
+                             name
+                           }: WeeksCountProps) => {
   const currentAge = Math.floor(
-    (currentDate.getTime() - birthData) / 1000 / 60 / 60 / 24 / 365,
+      (currentDate.getTime() - birthData) / 1000 / 60 / 60 / 24 / 365
   );
   const currentWeek = getCurrentYearWeek();
 
-  const years = lifeExpectancy;
+  const years = lifeExpectancy as number;
   const weeksPerYear = 52;
 
   // Step 1: Use a ref to store the p5 instance
@@ -45,15 +42,12 @@ export const WeeksCount = ({
     let squareSize: number;
     let canvasWidth: number;
     let canvasHeight: number;
-    // const xOffset = 90;
-    // const yOffset = 70;
     const xOffset = 55;
     const yOffset = 35;
 
     p.setup = () => {
       // Set the square size dynamically based on window width
       squareSize = p.map(p.windowWidth, 320, 1920, 5, 10);
-      console.log("p.windowWidth,", p.windowWidth);
       canvasWidth = weeksPerYear * squareSize + xOffset * 2;
       canvasHeight = years * squareSize + yOffset * 2;
 
@@ -139,7 +133,7 @@ export const WeeksCount = ({
   // Function to download the image
   const downloadImage = () => {
     if (p5Ref.current) {
-      p5Ref.current.saveCanvas("life-grid", "png");
+      p5Ref.current.saveCanvas('life-grid', 'png');
     }
   };
 
@@ -170,18 +164,18 @@ export const WeeksCount = ({
   const allLifeWeeks = weeksCalculator(birthData, currentDate);
 
   return (
-    <div className={styles.weeks_count}>
-      <h1 className={styles.weeks_count__title}>
-        {name}, you have already lived {allLifeWeeks} weeks
-      </h1>
-      <ReactP5Wrapper sketch={sketch} />
-      <button onClick={downloadImage} className={styles.download_button}>
-        Download as Image
-      </button>
-      <div className={styles.share_buttons}>
-        {/*<button onClick={downloadImageAndShare} className={styles.share_button}>Share on Facebook</button>*/}
-        {/*<button onClick={downloadImageAndShare} className={styles.share_button}>Share on Twitter</button>*/}
+      <div className={styles.weeks_count}>
+        <h1 className={styles.weeks_count__title}>
+          {name}, have already lived {allLifeWeeks} weeks
+        </h1>
+        <ReactP5Wrapper sketch={sketch}/>
+        <button onClick={downloadImage} className={styles.download_button}>
+          Download as Image
+        </button>
+        <div className={styles.share_buttons}>
+          {/*<button onClick={downloadImageAndShare} className={styles.share_button}>Share on Facebook</button>*/}
+          {/*<button onClick={downloadImageAndShare} className={styles.share_button}>Share on Twitter</button>*/}
+        </div>
       </div>
-    </div>
   );
 };

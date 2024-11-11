@@ -1,9 +1,11 @@
 import { configureStore, EnhancedStore } from "@reduxjs/toolkit";
 import userReducer from "./userState";
+import countryReducer from "./countryState";
 
 const store: EnhancedStore = configureStore({
   reducer: {
     user: userReducer,
+    country: countryReducer,
   },
 });
 

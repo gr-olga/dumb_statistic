@@ -140,7 +140,7 @@ const initialState: TDemographicData = {
 
 // Create the user slice
 export const userSlice = createSlice({
-  name: "user",
+  name: "country",
   initialState,
   reducers: {
     setCountryData(state, action: PayloadAction<TDemographicData>) {
